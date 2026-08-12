@@ -11,10 +11,11 @@ Windows Server 2019/2022/2025 üzerinde çalışacak şekilde tasarlanmış, pro
 5. [Botu Başlatma](#botu-başlatma)
 6. [Komutlar](#komutlar)
 7. [Oyun Sistemi](#oyun-sistemi)
-8. [Windows Service Olarak Çalıştırma](#windows-service-olarak-çalıştırma)
-9. [Sorun Giderme](#sorun-giderme)
-10. [Test Çalıştırma](#test-çalıştırma)
-11. [Proje Yapısı](#proje-yapısı)
+8. [Topluluk Sistemi](#topluluk-sistemi)
+9. [Windows Service Olarak Çalıştırma](#windows-service-olarak-çalıştırma)
+10. [Sorun Giderme](#sorun-giderme)
+11. [Test Çalıştırma](#test-çalıştırma)
+12. [Proje Yapısı](#proje-yapısı)
 
 ---
 
@@ -153,6 +154,9 @@ Tüm değişkenlerin tam listesi ve açıklamaları için `.env.example` dosyas�
 | `MAX_VIDEO_HEIGHT` | Varsayılan 720; sunucu performansı için düşürülebilir |
 | `FFMPEG_PATH` / `FFPROBE_PATH` | PATH'te değillerse tam dosya yolu |
 | `MAX_ACTIVE_GAMES_PER_CHAT` | Varsayılan 1; bir grupta aynı anda kaç oyunun aktif olabileceği (bkz. [Oyun Sistemi](#oyun-sistemi)) |
+| `SUPPORT_CHAT_ID` | Destek taleplerinin (ticket) düştüğü personel grubu; boşsa `/destek` kapalı kalır (bkz. [Topluluk Sistemi](#topluluk-sistemi)) |
+| `XP_COOLDOWN_SECONDS` / `XP_MIN` / `XP_MAX` / `XP_MIN_MESSAGE_LENGTH` | Mesaj başına XP kazanma ayarları (varsayılan: 45sn, 5-15 XP, en az 5 karakter) |
+| `FLOOD_MESSAGE_COUNT` / `FLOOD_WINDOW_SECONDS` | Flood koruması eşiği (varsayılan: 5 saniyede 7 mesaj) |
 
 ## Botu Başlatma
 
@@ -183,7 +187,7 @@ Tüm değişkenlerin tam listesi ve açıklamaları için `.env.example` dosyas�
 
 ### Owner / Sudo
 
-`/sudoadd` `/sudodel` `/sudolist` `/gban` `/ungban` `/broadcast <mesaj>` `/stats` `/ping` `/activevc` `/health` `/cleanup` `/debug` `/resolve <url>`
+`/sudoadd` `/sudodel` `/sudolist` `/gban` `/ungban` `/broadcast <mesaj>` `/stats` `/ping` `/activevc` `/health` `/cleanup` `/debug` `/resolve <url>` `/supportstats`
 
 ## Oyun Sistemi
 
@@ -212,6 +216,30 @@ birlikte.
 Faz 2'de eklenecekler (henüz yok): Kelime Anlatma, Casus Kim, Sudoku, Kelime
 Zinciri, Hafıza Şimşeği, Fark Bulmaca, Bul Bakalım, Pi, Doğruluk/Cesaret,
 Buton Oyunu, Eser Yazar ve Günlük Görevler.
+
+## Topluluk Sistemi
+
+Müzik/oyun sisteminden bağımsız (`app/community/`), moderasyon + karşılama/
+kurallar/duyuru + destek/ticket sistemi. Mesaj atarak kazanılan XP, oyun
+kazanarak kazanılan XP ile **aynı profilde** birikir (`/profil`, `/rank`).
+
+| Komut | Açıklama |
+|---|---|
+| `/rank` (`/rank @kullanıcı`, `/seviye`) | İlerleme çubuklu seviye kartı + grup/global sıralama |
+| `/ban` `/unban` `/kick` `/mute [süre] [sebep]` `/unmute` (Grup Admini) | Klasik moderasyon - `restrict_chat_member`/`ban_chat_member` ile gerçek Telegram yaptırımı |
+| `/warn @kullanıcı [sebep]` `/warnings @kullanıcı` (Grup Admini) | Uyarı sistemi - 3. uyarıda 10dk, 5.'te 1sa otomatik susturma, 7.'de otomatik ban |
+| `/purge <sayı>` `/pin` `/unpin` `/lock` `/unlock` `/slowmode <saniye>` (Grup Admini) | Toplu silme, sabitleme, grup kilidi, yavaş mod |
+| `/linkkoruma off\|all\|whitelist\|invite_only` `/linkwhitelist ekle\|sil\|liste` `/yasaklikelime ekle\|sil\|liste` `/floodkoruma on\|off` `/kufurkoruma on\|off` (Grup Admini) | AutoMod ayarları |
+| `/karsilamaayarla on\|off` `/karsilamamesaji <metin>` `/vedaayarla on\|off` `/vedamesaji <metin>` (Grup Admini) | Karşılama/veda mesajları - `{user}` `{first_name}` `{username}` `{chat}` `{member_count}` değişkenleriyle |
+| `/kurallar` `/kurallarayarla <metin>` (Grup Admini) | Kurallar metni + "Kabul Ediyorum" butonu |
+| `/duyuru <mesaj>` (reply ile medya da olur, sona `pinle` eklenirse sabitlenir) (Grup Admini) | Sadece bulunulan gruba duyuru - **`/broadcast`'ten farklı**, o tüm gruplara gider |
+| `/destek` | Kategori seçip DM üzerinden destek talebi açar (`SUPPORT_CHAT_ID` yapılandırılmış olmalı) |
+| `/reply <TICKET_ID> <mesaj>` `/closeticket <TICKET_ID>` (personel grubunda) | Ticket'a cevap verme/kapatma |
+| `/supportstats` (Owner/Sudo) | Açık/kapanan ticket sayıları, en aktif personel |
+
+Faz 2'de eklenecekler: Ekonomi/Shop/Görevler, Giveaway, Kayıt/Referral,
+Doğum günü/Not/Hatırlatıcı/AFK, otomatik rozet/VIP/Tag sistemleri,
+Captcha/Raid koruması, zamanlanmış duyuru (`/duyuru planla`).
 
 ## Windows Service Olarak Çalıştırma
 
@@ -263,11 +291,13 @@ app/
     media/        - resolver.py, models.py, providers/ (youtube, spotify, apple_music, soundcloud,
                      direct, hls, radio, telegram, generic, ytdlp_engine)
     queue/        - manager.py (QueueRegistry/ChatQueue), models.py (QueueItem, PlayerSession)
-    handlers/     - play, controls, callbacks, admin, owner, settings, general, games_bridge.py
-                     (imports app/games/handlers/* so Pyrogram's plugin scanner finds them)
+    handlers/     - play, controls, callbacks, admin, owner, settings, general,
+                     games_bridge.py, community_bridge.py (import app/games and app/community
+                     handlers so Pyrogram's plugin scanner - which only walks app/handlers - finds them)
     services/     - database, cookies, cache, retry, statistics, permissions, rate_limiter,
                      spam_guard, event_bus, i18n, health, telegram_logger, now_playing, playback_log
-    database/     - models.py, repositories.py, game_models.py, game_repositories.py
+    database/     - models.py, repositories.py, game_models.py, game_repositories.py,
+                     community_models.py, community_repositories.py
     locales/      - tr.json, en.json
     games/        - independent games/eğlence module (see "Oyun Sistemi" above)
                      core/     - BaseGame, GameSession/GameSessionManager, GameRegistry,
@@ -276,6 +306,12 @@ app/
                      data/     - JSON datasets (trivia, countries, turkey_plates, words, ...)
                      handlers/ - commands.py, callbacks.py, messages.py
                      services/ - leaderboard.py, statistics.py, rewards.py
+    community/    - independent moderation/topluluk module (see "Topluluk Sistemi" above) -
+                     shares game_users/XP with games/ (see plan decision #1), otherwise fully
+                     independent (own core/handlers/database, own group=2 message pipeline)
+                     core/     - text (badword/link matching), flood, warnings policy, scheduler
+                     handlers/ - moderation.py, automod_settings.py, welcome.py, announcement.py,
+                                 support.py, commands.py (/rank), messages.py (group=2 pipeline), callbacks.py
 scripts/          - generate_session.py, install_service.ps1
 tests/            - pytest test suite
 main.py           - entry point
