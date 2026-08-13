@@ -237,9 +237,35 @@ kazanarak kazanılan XP ile **aynı profilde** birikir (`/profil`, `/rank`).
 | `/reply <TICKET_ID> <mesaj>` `/closeticket <TICKET_ID>` (personel grubunda) | Ticket'a cevap verme/kapatma |
 | `/supportstats` (Owner/Sudo) | Açık/kapanan ticket sayıları, en aktif personel |
 
-Faz 2'de eklenecekler: Ekonomi/Shop/Görevler, Giveaway, Kayıt/Referral,
-Doğum günü/Not/Hatırlatıcı/AFK, otomatik rozet/VIP/Tag sistemleri,
-Captcha/Raid koruması, zamanlanmış duyuru (`/duyuru planla`).
+### Faz 2 — Yönetim/Koruma Genişletme, Panel, Captcha/Raid
+
+| Komut | Açıklama |
+|---|---|
+| `/kurulum` (Grup Admini) | 5 adımlı kurulum sihirbazı - karşılama, koruma, captcha, log bilgisi, gece modu |
+| `/panel` (Grup Admini) | Yönetim panelini adminin DM'ine gönderir - butonlarla ayar değiştirilir |
+| `/logkanal -100xxxxxxxxx` (Grup Admini, grubun içinden) | Grubun loglarını belirtilen kanala bağlar (önce test mesajı gönderip siler) |
+| `/sus @kullanıcı [10d\|2s\|3g] [sebep]` `/tban @kullanıcı <süre> [sebep]` | Türkçe süre formatlı (dakika/saat/gün) susturma/geçici ban - `/mute`'un `m/h/d/s` formatından **kasıtlı olarak ayrı** parser kullanır, `/mute` davranışı değişmez |
+| `/hayaletban @kullanıcı\|USER_ID` | Grupta hiç görülmemiş kullanıcıyı önceden banlar - katılır/mesaj atarsa otomatik gerçek ban uygulanır |
+| `/admin @kullanıcı` (şablon seçimi: Mod/Editör/Full) `/muter` `/unmuter` `/yetkiler @admin <yetki> on\|off` `/deadmin` `/adminler` (Grup Admini) | Admin yetki yönetimi - mevcut diğer yetkiler her zaman korunur (read-then-merge) |
+| `/rapor` (reply ile) | Mesajı log kanalına iletir, benzersiz rapor ID'si üretir |
+| `/banlimit <sayı>` `/promotelimit <sayı>` `/grupinfolimit <sayı>` (Grup Admini) | Günlük admin işlem limitleri - owner her zaman muaf |
+| `/del` (reply ile) `/unpinall` (Grup Admini) | Tek mesaj silme, tüm sabitlemeleri kaldırma |
+| `/filter "kelime" cevap` (medyaya reply de olur) `/stop "kelime"` `/filters` (Grup Admini ekler/siler, herkes listeler) | Grup özel otomatik yanıtlar - `{mention} {first_name} {username} {id}` değişkenleriyle |
+| `/icerikengelle <tip> ac\|kapat` `/icerikengellilistesi` (Grup Admini) | 15 içerik tipini engelleme (sticker, gif, link, mention, sadeemoji, vb.) |
+| `/packengelle` `/packizinver` `/packlistesi` (reply ile) | Sticker paketi bazlı engelleme |
+| `/gifengelle` `/gifizinver` `/giflistesi` (reply ile) | GIF bazlı engelleme |
+| `/editkoruma ac\|kapat\|<dakika>` | Bir mesaj gönderildikten sonra yasaklı içerik ekleyecek şekilde düzenlenmesini tespit edip siler |
+| `/reklamkoruma ac\|kapat` | Telegram davet linklerini link modundan bağımsız olarak engeller |
+| `/joinraidac` `/raidbitti` | Raid modunu manuel aç/kapat - kapatma tüm kısıtlı kullanıcıları serbest bırakır |
+| Captcha (`/kurulum`/`/panel` üzerinden açılır) | Yeni üye "robot değilim" butonuna basana kadar susturulur; süre dolarsa otomatik atılır (restart-safe sweep) |
+| Gece modu (`/kurulum`/`/panel` üzerinden açılır) | Yapılandırılan saatlerde (varsayılan 00:00-07:00, `Europe/Istanbul`) grup otomatik kilitlenir/açılır |
+
+Sıradaki turlar (bu fazın kapsamı dışında, spec'in kendi "faz faz ilerle"
+kuralı gereği sırayla ele alınacak): Ekonomi (`/gunluk` `/market` `/kasam`
+`/borsa` görevler), Oyun genişletme (Arena, Tabu, Dedektif, Soygun, Bomba,
+Kura, Kimyazdı, Casus), Federasyon (çapraz-grup ban ağı), Clone Bot. AI
+(Faz 16, "Aleyna") gerçek bir LLM sağlayıcısı bağlanana kadar eklenmiyor -
+uydurma cevap üretilmiyor.
 
 ## Windows Service Olarak Çalıştırma
 
