@@ -12,10 +12,11 @@ Windows Server 2019/2022/2025 üzerinde çalışacak şekilde tasarlanmış, pro
 6. [Komutlar](#komutlar)
 7. [Oyun Sistemi](#oyun-sistemi)
 8. [Topluluk Sistemi](#topluluk-sistemi)
-9. [Windows Service Olarak Çalıştırma](#windows-service-olarak-çalıştırma)
-10. [Sorun Giderme](#sorun-giderme)
-11. [Test Çalıştırma](#test-çalıştırma)
-12. [Proje Yapısı](#proje-yapısı)
+9. [Ekonomi Sistemi](#ekonomi-sistemi)
+10. [Windows Service Olarak Çalıştırma](#windows-service-olarak-çalıştırma)
+11. [Sorun Giderme](#sorun-giderme)
+12. [Test Çalıştırma](#test-çalıştırma)
+13. [Proje Yapısı](#proje-yapısı)
 
 ---
 
@@ -157,6 +158,8 @@ Tüm değişkenlerin tam listesi ve açıklamaları için `.env.example` dosyas�
 | `SUPPORT_CHAT_ID` | Destek taleplerinin (ticket) düştüğü personel grubu; boşsa `/destek` kapalı kalır (bkz. [Topluluk Sistemi](#topluluk-sistemi)) |
 | `XP_COOLDOWN_SECONDS` / `XP_MIN` / `XP_MAX` / `XP_MIN_MESSAGE_LENGTH` | Mesaj başına XP kazanma ayarları (varsayılan: 45sn, 5-15 XP, en az 5 karakter) |
 | `FLOOD_MESSAGE_COUNT` / `FLOOD_WINDOW_SECONDS` | Flood koruması eşiği (varsayılan: 5 saniyede 7 mesaj) |
+| `ECONOMY_DAILY_COIN_MIN` / `ECONOMY_DAILY_COIN_MAX` / `ECONOMY_DAILY_XP` | `/gunluk` ödül aralığı (varsayılan: 100-300 coin, 15 XP) |
+| `ECONOMY_COINFLIP_WIN_CHANCE` / `ECONOMY_TRANSFER_DAILY_LIMIT` | Coinflip kazanma ihtimali (varsayılan 0.45) ve `/coinaktar` günlük limiti (varsayılan 5000, 0 = sınırsız) |
 
 ## Botu Başlatma
 
@@ -267,6 +270,55 @@ Kura, Kimyazdı, Casus), Federasyon (çapraz-grup ban ağı), Clone Bot. AI
 (Faz 16, "Aleyna") gerçek bir LLM sağlayıcısı bağlanana kadar eklenmiyor -
 uydurma cevap üretilmiyor.
 
+## Ekonomi Sistemi
+
+Bağımsız bir üçüncü modül olarak çalışan (`app/economy/`) coin cüzdanı ve
+günlük ödül sistemi. **Coin bakiyesi grup bazlıdır** (her grupta ayrı bir
+bakiyen olur) — bu, mevcut Faz 1'de tamamen birleştirilmiş/global olan
+XP/seviye sisteminden **bilinçli olarak farklı bir tasarım**: coin'in grup
+bazlı olması, ileride eklenecek "kasa" (global, gruplar arası taşınabilir
+coin deposu) özelliğinin var olma sebebidir.
+
+| Komut | Açıklama |
+|---|---|
+| `/rehber` | Coin/XP sistemini anlatan interaktif rehber (buton menüsü) |
+| `/coin` (reply ile başkasının bakiyesi) | Bu gruptaki coin bakiyeni gösterir |
+| `/coinaktar <miktar>` (reply ile) | Coin transferi - atomic, kendine transfer yok, günlük transfer limiti + kısa cooldown korumalı |
+| `/coinliderlik` | Bu grubun en zengin 10 kullanıcısı |
+| `/coinsampiyon` | Tüm gruplardaki toplam bakiyeye göre global coin liderliği |
+| `/gunluk` (`/daily`) | Her 20 saatte bir coin+XP ödülü - art arda alınca seri bonusu büyür |
+| `/coinflip_ac` `/coinflip_kapat` (Grup Admini) | Coinflip minigame'ini aç/kapat (varsayılan kapalı) |
+| `/coinflip <miktar>` | %45 kazanma ihtimalli yazı-tura - `secrets` modülüyle güvenli RNG, sadece sanal coin, gerçek para/değer taşımaz |
+| `/xpac` `/xpkapat` (Grup Admini) | Mesaj-XP sistemini aç/kapat (Faz 1'den beri var olan `xp_enabled` ayarına kısayol) |
+| `/seviye` `/level` (mevcut `/profil`/`/gameprofile` alias'ı, reply destekli) | Level/XP/Coin/Oyun Serisi/Günlük Ödül Serisi gösterir |
+| `/xpliderlik` | Bu grubun top 10 XP kullanıcısı (mevcut liderlik tablosunun grup-bazlı modu) |
+
+### Faz 4 — Günlük Görevler
+
+5 sabit günlük görev - tamamlanan görev **otomatik** ödüllendirilir (manuel
+"claim" yok) ve o grupta kısa bir bildirim gönderilir. İlerleme 4 ayrı
+mevcut sistemden (mesaj pipeline'ı, oyun bitişi, `/play`, `/coinaktar`)
+best-effort hook'larla beslenir - görev takibi asla o sistemlerin asıl
+işlevini etkilemez (her hook `try/except` içinde).
+
+| Komut | Açıklama |
+|---|---|
+| `/gorevler` (`/gorev`, `/missions`) | Bugünkü 5 görevin ilerlemesini gösterir (salt-okunur - ödüller otomatik verilir) |
+
+| Görev | Hedef | Ödül |
+|---|---|---|
+| 20 mesaj gönder | 20 | 30 coin + 5 XP |
+| 2 oyun oyna | 2 | 30 coin + 5 XP |
+| 1 oyun kazan | 1 | 50 coin + 10 XP |
+| Coin transfer et | 1 | 20 coin + 5 XP |
+| Bir müzik isteği yap | 1 | 20 coin + 5 XP |
+
+Görevler grup bazlıdır (coin gibi) ve her gün 00:00 UTC'de sıfırlanır.
+
+Sıradaki turlar (bu fazın kapsamı dışında, sırayla): Haftalık Rapor,
+Market + Envanter + Kasa, Sanal Borsa, Oyun Genişletme, Federasyon,
+Clone Bot.
+
 ## Windows Service Olarak Çalıştırma
 
 Botun sunucu yeniden başladığında otomatik açılması ve çökme durumunda otomatik yeniden başlaması için [NSSM](https://nssm.cc/download) kullanılması önerilir:
@@ -318,8 +370,9 @@ app/
                      direct, hls, radio, telegram, generic, ytdlp_engine)
     queue/        - manager.py (QueueRegistry/ChatQueue), models.py (QueueItem, PlayerSession)
     handlers/     - play, controls, callbacks, admin, owner, settings, general,
-                     games_bridge.py, community_bridge.py (import app/games and app/community
-                     handlers so Pyrogram's plugin scanner - which only walks app/handlers - finds them)
+                     games_bridge.py, community_bridge.py, economy_bridge.py (import
+                     app/games, app/community, app/economy handlers so Pyrogram's plugin
+                     scanner - which only walks app/handlers - finds them)
     services/     - database, cookies, cache, retry, statistics, permissions, rate_limiter,
                      spam_guard, event_bus, i18n, health, telegram_logger, now_playing, playback_log
     database/     - models.py, repositories.py, game_models.py, game_repositories.py,
@@ -335,9 +388,21 @@ app/
     community/    - independent moderation/topluluk module (see "Topluluk Sistemi" above) -
                      shares game_users/XP with games/ (see plan decision #1), otherwise fully
                      independent (own core/handlers/database, own group=2 message pipeline)
-                     core/     - text (badword/link matching), flood, warnings policy, scheduler
-                     handlers/ - moderation.py, automod_settings.py, welcome.py, announcement.py,
-                                 support.py, commands.py (/rank), messages.py (group=2 pipeline), callbacks.py
+                     core/     - text (badword/link matching), flood, warnings policy, scheduler,
+                                 registry, durations, ghost_ban, raid, edit_guard, captcha, night_mode
+                     handlers/ - moderation.py, automod_settings.py (+/xpac /xpkapat), welcome.py,
+                                 announcement.py, support.py, commands.py (/rank), panel.py, filters.py,
+                                 content_block.py, captcha.py, messages.py (group=2 pipeline), callbacks.py
+    economy/      - independent coin-wallet module (see "Ekonomi Sistemi" above) - GROUP-scoped
+                     balance (unlike XP, which stays global/unified in game_users)
+                     core/     - transaction_service.py (single entry point for every coin mutation),
+                                 daily.py (streak/cooldown math), rng.py (secrets-based coinflip RNG),
+                                 missions.py (MISSION_DEFINITIONS, MissionService, notify_mission_completed -
+                                 called from 4 external hook points: community/handlers/messages.py,
+                                 games/services/statistics.py, handlers/play.py, economy/handlers/wallet.py)
+                     database/ - economy_models.py, economy_repositories.py
+                     handlers/ - wallet.py (/coin /coinaktar /coinliderlik /gunluk /coinflip*
+                                 /coinsampiyon), guide.py (/rehber), missions.py (/gorevler)
 scripts/          - generate_session.py, install_service.ps1
 tests/            - pytest test suite
 main.py           - entry point
