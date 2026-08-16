@@ -5,7 +5,7 @@
 <b>All-in-One Telegram Group Bot</b><br>
 Music streaming, moderation, protection, economy, games, federations, and more — in 13 languages.
 
-<a href="../LICENSE">
+<a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License"/>
 </a>
 <a href="https://www.python.org/">
