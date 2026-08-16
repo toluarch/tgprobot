@@ -2,69 +2,68 @@
 
 <h2>TgProBot</h2>
 
-<b>All-in-One Telegram Group Bot</b><br>
-Music streaming, moderation, protection, economy, games, federations, and more — in 13 languages.
+<b>Hepsi Bir Arada Telegram Grup Botu</b><br>
+Müzik yayını, moderasyon, koruma, ekonomi, oyunlar, federasyonlar ve çok daha fazlası — 13 dil desteğiyle.
 
 <a href="LICENSE">
-    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License"/>
+    <img src="https://img.shields.io/badge/Lisans-MIT-blue?style=for-the-badge" alt="Lisans"/>
 </a>
 <a href="https://www.python.org/">
-    <img src="https://img.shields.io/badge/Written%20in-Python-blue?style=for-the-badge&logo=python" alt="Python"/>
+    <img src="https://img.shields.io/badge/Geliştirme%20Dili-Python-blue?style=for-the-badge&logo=python" alt="Python"/>
 </a>
 <a href="https://docs.pyrogram.org/">
-    <img src="https://img.shields.io/badge/Built%20with-Pyrogram-blue?style=for-the-badge" alt="Pyrogram"/>
+    <img src="https://img.shields.io/badge/Pyrogram%20ile-Geliştirildi-blue?style=for-the-badge" alt="Pyrogram"/>
 </a>
 <br>
 
 <img src="anonx.jpg" width="720" height="auto">
 
-TgProBot is a full-featured Telegram group management bot: it streams music into video chats, moderates and protects your group, runs a coin economy with a virtual stock market, hosts mini-games, and links groups together into federations — all configurable per-chat, in 13 languages.
-<br><br>
+TgProBot, tam donanımlı bir Telegram grup yönetim botudur. Grup görüntülü sohbetlerinde müzik yayını yapar, grubunuzu yönetir ve korur, sanal borsa içeren bir coin ekonomisi sunar, mini oyunlar düzenler ve birden fazla grubu federasyon sistemiyle birbirine bağlar. Tüm özellikler sohbet bazında ayrı ayrı yapılandırılabilir ve 13 dil desteğine sahiptir. <br><br>
 
 <a href="https://t.me/pamukmusicbot?startgroup=true">
-    <img src="https://img.shields.io/badge/➕_Beni_Grubuma_Ekle-4CAF50?style=for-the-badge&logoColor=white" alt="Add to group"/>
+    <img src="https://img.shields.io/badge/➕_Beni_Grubuma_Ekle-4CAF50?style=for-the-badge&logoColor=white" alt="Gruba ekle"/>
 </a>
 <a href="https://t.me/pamukmusicbot">
-    <img src="https://img.shields.io/badge/💬_Yardım-17A2B8?style=for-the-badge&logoColor=white" alt="Help"/>
+    <img src="https://img.shields.io/badge/💬_Yardım-17A2B8?style=for-the-badge&logoColor=white" alt="Yardım"/>
 </a>
 <a href="<your-repo-url>">
-    <img src="https://img.shields.io/badge/🔗_Kaynak-2C3E50?style=for-the-badge&logo=github&logoColor=white" alt="Source"/>
+    <img src="https://img.shields.io/badge/🔗_Kaynak_Kod-2C3E50?style=for-the-badge&logo=github&logoColor=white" alt="Kaynak kod"/>
 </a>
 </div>
 
 <hr>
 
-<h2>🔥 Features</h2>
+<h2>🔥 Özellikler</h2>
 
-- 🎵 **Music** — stream audio/video into group video chats (YouTube, Spotify, Apple Music, SoundCloud, and more), with queueing, loop, and seek
-- 🛡 **Moderation** — mute/ban/kick/tban, warning system with configurable limits, message purge, daily ban limits
-- 🔒 **Protection** — forbidden-word filters, link/ad protection, captcha verification for new members, anti-flood, edit protection
-- 👋 **Welcome & night mode** — custom join/leave messages, scheduled night mode per chat
-- 💰 **Economy** — XP/leveling, daily rewards with streak bonuses, a coin market, a personal vault, and a virtual stock market driven by real chat activity
-- 🎮 **Games** — dice, math races, word chains, truth-or-dare, bomb-pass, emoji riddles, and more
-- 💬 **Social** — compatibility checks, horoscopes, daily fortunes, and other lighthearted chat commands
-- 📢 **Tagging** — flood-safe mass mentions with speed control and a blacklist
-- ⏰ **Scheduler** — schedule recurring or one-off messages per chat
-- 🗒 **Notes** — save and recall notes with `#shortcut` triggers, mirroring Telegram's saved-filter pattern
-- 🌐 **Federations** — link multiple groups under a shared ban list and moderation log
-- 📊 **Stats** — per-chat and per-user activity leaderboards
-- ⚙️ **Panel** — inline settings panel per chat, with a categorized in-bot `/help` menu
-- 🌍 **13 languages** — `ar de en es fr hi ja my pa pt ru tr zh`, fully translated including all of the above
+* 🎵 **Müzik** — YouTube, Spotify, Apple Music, SoundCloud ve daha birçok platformdan grup görüntülü sohbetlerine ses veya video yayını yapar; sıra, döngü ve ileri-geri sarma özelliklerini destekler.
+* 🛡 **Moderasyon** — Susturma, yasaklama, gruptan atma, süreli yasaklama, yapılandırılabilir limitlere sahip uyarı sistemi, mesaj temizleme ve günlük yasaklama limitleri.
+* 🔒 **Koruma** — Yasaklı kelime filtreleri, bağlantı ve reklam koruması, yeni üyeler için CAPTCHA doğrulaması, flood koruması ve mesaj düzenleme koruması.
+* 👋 **Karşılama ve gece modu** — Özelleştirilebilir katılma/ayrılma mesajları ve sohbet bazında zamanlanabilen gece modu.
+* 💰 **Ekonomi** — XP ve seviye sistemi, seri bonusları içeren günlük ödüller, coin marketi, kişisel kasa ve gerçek sohbet etkinliğine göre hareket eden sanal borsa.
+* 🎮 **Oyunlar** — Zar, matematik yarışları, kelime zinciri, doğruluk mu cesaret mi, bomba paslama, emoji bilmeceleri ve daha fazlası.
+* 💬 **Sosyal** — Uyumluluk testleri, burçlar, günlük fallar ve diğer eğlenceli sohbet komutları.
+* 📢 **Etiketleme** — Hız kontrolü ve kara liste desteği bulunan, flood korumalı toplu etiketleme sistemi.
+* ⏰ **Zamanlayıcı** — Sohbet bazında tekrarlanan veya tek seferlik mesajlar zamanlama.
+* 🗒 **Notlar** — Telegram’ın kayıtlı filtre sistemine benzer şekilde, `#kısayol` tetikleyicileriyle not kaydetme ve çağırma.
+* 🌐 **Federasyonlar** — Birden fazla grubu ortak yasaklama listesi ve moderasyon günlüğü altında birbirine bağlama.
+* 📊 **İstatistikler** — Sohbet ve kullanıcı bazında etkinlik sıralamaları.
+* ⚙️ **Panel** — Her sohbet için satır içi ayar paneli ve kategorilere ayrılmış bot içi `/help` menüsü.
+* 🌍 **13 dil** — `ar de en es fr hi ja my pa pt ru tr zh`; yukarıdaki tüm özellikler tamamen çevrilmiştir.
 
 <hr>
 
-<h2>☁️ Manual Deployment</h2>
+<h2>☁️ Manuel Kurulum</h2>
 
-<h3>✔️ Prerequisites</h3>
+<h3>✔️ Gereksinimler</h3>
 
-- <a href="https://www.python.org">Python 3.10+</a> installed
-- <a href="https://deno.com/">deno</a> & <a href="https://ffmpeg.org/">ffmpeg</a> installed on your system
-- A MongoDB database (e.g. <a href="https://cloud.mongodb.com">MongoDB Atlas</a>)
-- Required variables mentioned in <a href="../sample.env">sample.env</a>
+* Sisteminizde <a href="https://www.python.org">Python 3.10+</a> kurulu olmalıdır.
+* Sisteminizde <a href="https://deno.com/">Deno</a> ve <a href="https://ffmpeg.org/">FFmpeg</a> kurulu olmalıdır.
+* Bir MongoDB veritabanı gereklidir. Örneğin <a href="https://cloud.mongodb.com">MongoDB Atlas</a> kullanılabilir.
+* <a href="../sample.env">sample.env</a> dosyasında belirtilen gerekli değişkenler hazırlanmalıdır.
 
 <details>
     <summary>
-        <h3>Local / VPS Setup</h3>
+        <h3>Yerel Bilgisayar / VPS Kurulumu</h3>
     </summary>
 
 <h4>🐧 Linux/macOS</h4>
@@ -72,136 +71,141 @@ TgProBot is a full-featured Telegram group management bot: it streams music into
 ```bash
 git clone <your-repo-url> && cd TgProBot
 
-# Install uv
+# uv paket yöneticisini yükleyin
 curl -Ls https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install dependencies
+# Bağımlılıkları yükleyin
 uv sync --frozen
 
-# Rename and configure environment variables
+# Ortam değişkenleri dosyasını yeniden adlandırın ve yapılandırın
 mv sample.env .env
-# Edit .env with your credentials
+# .env dosyasını bilgilerinizle düzenleyin
 
-# Start the bot
+# Botu başlatın
 bash start
 ```
 
 <h4>🪟 Windows (PowerShell)</h4>
 
-Run the bundled setup script — it installs `ffmpeg`, `deno`, `uv`, the Python dependencies, and prompts for your credentials to generate `.env`:
+Projeyle birlikte gelen kurulum betiğini çalıştırın. Bu betik `ffmpeg`, `deno`, `uv` ve gerekli Python bağımlılıklarını yükler. Ardından gerekli bilgileri sorarak `.env` dosyasını otomatik olarak oluşturur:
 
 ```powershell
 git clone <your-repo-url> && cd TgProBot
 
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
 
-# Start the bot
+# Botu başlatın
 .\start.ps1
 ```
 
-> ⭐ If you'd rather set things up by hand: `winget install ffmpeg`, install [deno](https://deno.com/) and [uv](https://docs.astral.sh/uv/getting-started/installation/), copy `sample.env` to `.env`, then run `uv run python -m tgprobot` (not `python3` — Windows/uv virtual environments don't ship a `python3` executable). Git Bash or WSL also work with `bash start`.
+> ⭐ Kurulumu elle yapmak isterseniz `winget install ffmpeg` komutuyla FFmpeg’i yükleyin, ardından [Deno](https://deno.com/) ve [uv](https://docs.astral.sh/uv/getting-started/installation/) kurulumlarını tamamlayın. `sample.env` dosyasını `.env` adıyla kopyalayın ve `uv run python -m tgprobot` komutunu çalıştırın. Windows/uv sanal ortamlarında `python3` çalıştırılabilir dosyası bulunmadığı için `python3` kullanmayın. Git Bash veya WSL kullanıyorsanız botu `bash start` komutuyla da başlatabilirsiniz.
 
 </details>
 
 <details>
     <summary>
-        <h3>Deploy to Heroku</h3>
+        <h3>Heroku’ya Dağıtım</h3>
     </summary>
 
-This repo includes an `app.json` and `heroku.yml`, so it can be deployed directly from your own fork via Heroku's "Deploy from GitHub" flow.
+Bu depo `app.json` ve `heroku.yml` dosyalarını içerir. Bu nedenle kendi fork’unuz üzerinden Heroku’nun “Deploy from GitHub” özelliği kullanılarak doğrudan dağıtılabilir.
+
 </details>
 
 <hr>
 
-<h2>⚙️ Configuration</h2>
+<h2>⚙️ Yapılandırma</h2>
 
-Edit <code>.env</code> (or set variables in your hosting environment):
+<code>.env</code> dosyasını düzenleyin veya değişkenleri kullandığınız barındırma platformunun ortam değişkenleri bölümüne ekleyin:
+
 <details>
-    <summary>Here's an example of the .env file</summary>
+    <summary>Örnek .env dosyası</summary>
 
 ```env
-# from my.telegram.org/apps
+# my.telegram.org/apps adresinden alınır
 API_ID=123456
 API_HASH=abcdef1234567890
 
-# from @BotFather on telegram
+# Telegram üzerindeki @BotFather hesabından alınır
 BOT_TOKEN=123456:ABC-DEF
 LOGGER_ID=-1001234567890
 
-# mongo url from cloud.mongodb.com
+# cloud.mongodb.com adresinden alınan MongoDB bağlantısı
 MONGO_URL=mongodb+srv://
 
+# Bot sahibinin Telegram kullanıcı kimliği
 OWNER_ID=123456789
 
-# pyrogram session from @StringFatherBot on telegram
+# Telegram üzerindeki @StringFatherBot aracılığıyla alınan Pyrogram oturumu
 SESSION=BQgfh...AA
 
-# default bot language for new chats (see tgprobot/locales for available codes)
+# Yeni sohbetler için varsayılan bot dili
+# Kullanılabilir dil kodları tgprobot/locales dizininde bulunur
 LANG_CODE=tr
 ```
 
-> 📝 Check <a href="../config.py">config.py</a> for all available options.
+> 📝 Kullanılabilir tüm yapılandırma seçeneklerini görmek için <a href="../config.py">config.py</a> dosyasını inceleyin.
+
 </details>
 
 <hr>
 
-<h2>🧐 Usage</h2>
+<h2>🧐 Kullanım</h2>
 
-1. Add the bot to your Telegram group.
-2. Promote it to <b>admin</b> — grant invite, restrict, delete-message, and pin permissions for full functionality.
-3. Send `/help` in the chat (or in DM) for a categorized, in-bot command menu — every command below (and more) is listed there with its required permission level.
+1. Botu Telegram grubunuza ekleyin.
+2. Botu <b>yönetici</b> yapın. Tüm özelliklerin çalışabilmesi için kullanıcı davet etme, kullanıcıları kısıtlama, mesaj silme ve mesaj sabitleme izinlerini verin.
+3. Kategorilere ayrılmış bot içi komut menüsünü açmak için grupta veya botun özel mesajlarında `/help` komutunu gönderin. Aşağıdaki komutların tamamı ve daha fazlası, gerekli yetki seviyeleriyle birlikte bu menüde listelenir.
 
 <details>
-    <summary>Command overview by category</summary>
+    <summary>Kategorilere göre komut özeti</summary>
     <pre>
-🎵 Music      /play /vplay /pause /resume /skip /stop /seek /queue /loop
-🛡 Moderation /mute /unmute /ban /unban /kick /tban /warn /warnlist /del
-🔒 Protection /yasakkelime /linkkoruma /reklamkoruma /captcha /filter
-👋 Welcome    /hosgeldin /hoscakal /gecemodu
-💰 Economy    /seviye /gunluk /coin /coinaktar /market /borsa /kasam
-🎮 Games      /oyun /zar /matematik /kelimezinciri /kura /bomba
-💬 Social     /fal /burc /askolcer /tokat
-📢 Tagging    /herkes /adminlercagir /karaliste
-⏰ Scheduler  /zamanla /zamanlar /zamaniptal
-🗒 Notes      /not_ekle /not /notlar
-🌐 Federation /newfed /joinfed /fedstat /fedchats
-📊 Stats      /istatistik /liderlik /combotsira
-⚙️ Panel      /panel /lang
+🎵 Müzik       /play /vplay /pause /resume /skip /stop /seek /queue /loop
+🛡 Moderasyon  /mute /unmute /ban /unban /kick /tban /warn /warnlist /del
+🔒 Koruma      /yasakkelime /linkkoruma /reklamkoruma /captcha /filter
+👋 Karşılama   /hosgeldin /hoscakal /gecemodu
+💰 Ekonomi     /seviye /gunluk /coin /coinaktar /market /borsa /kasam
+🎮 Oyunlar     /oyun /zar /matematik /kelimezinciri /kura /bomba
+💬 Sosyal      /fal /burc /askolcer /tokat
+📢 Etiketleme  /herkes /adminlercagir /karaliste
+⏰ Zamanlayıcı /zamanla /zamanlar /zamaniptal
+🗒 Notlar      /not_ekle /not /notlar
+🌐 Federasyon  /newfed /joinfed /fedstat /fedchats
+📊 İstatistik  /istatistik /liderlik /combotsira
+⚙️ Panel       /panel /lang
     </pre>
 </details>
 
-A curated, BotFather-ready command list (for `/setcommands`) is included at <a href="../botfather_commands.txt">botfather_commands.txt</a> in the repo root.
+`/setcommands` bölümünde kullanılmak üzere hazırlanmış BotFather uyumlu komut listesi, projenin ana dizinindeki <a href="../botfather_commands.txt">botfather_commands.txt</a> dosyasında bulunmaktadır.
 
 <hr>
 
-<h2>❤️ Contributing</h2>
+<h2>❤️ Katkıda Bulunma</h2>
 
-Contributions are welcome!
+Projeye yapılacak katkılar memnuniyetle karşılanır!
 
-1. Fork the repository.
-2. Create your branch: <code>git checkout -b feature/new</code>.
-3. Commit changes: <code>git commit -m 'New feature'</code>.
-4. Push: <code>git push origin feature/new</code>
-5. Open a Pull Request.
-
-<hr>
-
-<h2>🗒️ License</h2>
-
-This project is licensed under the <b>MIT License</b> — see <a href="../LICENSE">LICENSE</a> for details.
+1. Depoyu fork’layın.
+2. Yeni dalınızı oluşturun: <code>git checkout -b feature/new</code>
+3. Değişikliklerinizi commit’leyin: <code>git commit -m 'Yeni özellik'</code>
+4. Değişiklikleri deponuza gönderin: <code>git push origin feature/new</code>
+5. Bir Pull Request açın.
 
 <hr>
 
-<h2>👀 Acknowledgements</h2>
+<h2>🗒️ Lisans</h2>
 
-- Originally forked from the open-source <b>AnonXMusic</b> Telegram music bot, then substantially extended with moderation, protection, economy, games, social, tagging, scheduling, notes, federation, and stats systems.
-- Built with <a href="https://docs.pyrogram.org/">Pyrogram</a> and <a href="https://github.com/pytgcalls/pytgcalls">Py-TgCalls</a>.
+Bu proje <b>MIT Lisansı</b> ile lisanslanmıştır. Ayrıntılı bilgi için <a href="../LICENSE">LICENSE</a> dosyasını inceleyin.
+
+<hr>
+
+<h2>👀 Teşekkürler</h2>
+
+* Proje başlangıçta açık kaynaklı <b>AnonXMusic</b> Telegram müzik botundan fork’lanmış, daha sonra moderasyon, koruma, ekonomi, oyunlar, sosyal komutlar, etiketleme, zamanlama, notlar, federasyon ve istatistik sistemleriyle kapsamlı biçimde geliştirilmiştir.
+* <a href="https://docs.pyrogram.org/">Pyrogram</a> ve <a href="https://github.com/pytgcalls/pytgcalls">Py-TgCalls</a> kullanılarak geliştirilmiştir.
 
 <hr>
 
 <div align="center">
 
-⭐ If this project is useful to you, consider starring the repo!
+⭐ Bu proje işinize yaradıysa GitHub deposuna yıldız vermeyi düşünebilirsiniz!
 
 </div>
